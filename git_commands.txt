@@ -1,0 +1,59 @@
+GIT COMMANDS USED IN THE ASSIGNMENT
+===================================
+
+SETUP
+mkdir git-assignment && cd git-assignment
+    Create the project folder and move into it.
+git init -b main
+    Initialise an empty Git repository with "main" as the default branch.
+git config user.name "Your Name"  /  git config user.email "you@example.com"
+    Set the author identity attached to commits.
+
+STEP 2: WORKFLOW
+git add .
+    Stage all new/changed files for the next commit.
+git commit -m "Initial commit: add index.html and about.html"
+    Record the initial state of the project.
+git commit -am "Update index.html with welcome message"
+    Stage modified tracked files and commit them (second commit).
+git branch feature
+    Create a new branch named feature.
+git switch feature
+    Switch to the feature branch (same as: git checkout feature).
+git commit -am "Add contact info to about.html"
+    Commit the change made on the feature branch.
+git switch main
+    Switch back to the main branch.
+git merge --no-ff feature -m "Merge branch 'feature' into main"
+    Merge feature into main; --no-ff keeps an explicit merge commit so branch activity is visible.
+git log --oneline --graph --all
+    Show the full commit history as a graph, including branches.
+
+STEP 3: .gitignore
+printf '*.log\ntemp/\n' > .gitignore
+    Create .gitignore ignoring all .log files and the temp/ folder.
+git status --short
+    Show a compact status; confirms debug.log and temp/ are not tracked.
+git add .gitignore && git commit -m "Add .gitignore for .log files and temp/ folder"
+    Commit the .gitignore file.
+
+STEP 4: UNDO
+git commit -am "Add extra comment to index.html"
+    Make an additional commit that will be undone.
+git log --oneline
+    View history before the undo.
+git reset --hard HEAD~1
+    Undo the last commit and discard its changes (move branch back one commit).
+    (Alternative that keeps history: git revert HEAD)
+git log --oneline ; git status
+    Verify the commit is gone and the working tree is clean.
+
+STEP 5: GITHUB
+git remote add origin https://github.com/<your-username>/<repo-name>.git
+    Link the local repo to the empty public GitHub repository.
+git push -u origin main
+    Push main to GitHub and set it as the upstream branch.
+git push origin feature
+    Push the feature branch so the branch history is visible on GitHub.
+git remote -v
+    Verify the configured remote URL.
